@@ -13,7 +13,7 @@ const options={
  school:['Tamil','Malayalam','Hindi','Other programmes','General school enquiry'],
  care:["Women's health",'Pregnancy & motherhood','Child health','Adolescent & teen health',"Men's health",'Mental wellbeing','Preventive health & nutrition','Webinars & events','Health partnership','Other'],
  works:['Workplace Tamil training','Workplace Kannada training','Other native-language training','Industry-specific training','Business partnership','Other'],
- general:['WisdaSchool','WisdaCare','WisdaWorks','Partnership','Other']
+ general:['WisdaCare','Partnership','Other']
 };
 const names={school:'WisdaSchool',care:'WisdaCare',works:'WisdaWorks',general:'Wisdatree'};
 let activeTrigger=null;

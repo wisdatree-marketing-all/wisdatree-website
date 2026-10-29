@@ -30,3 +30,8 @@ Version 9: Corrected WisdaSchool language-pathway art. Internal illustration spa
 - For advertising: use your final GitHub Pages URL to the webinar path. If your custom domain points to your GitHub Pages site at the root, the URL will be `https://wisdatree.com/wisdacare/webinars/motherhood-diaries/`. Otherwise use the actual GitHub Pages project URL/path.
 - For reliable Meta conversion optimization and tracking, add server-side registration storage and a confirmation page reached only after successful receipt. Clicking the WhatsApp button does not certify a registration.
 - Verify all URLs and WhatsApp message delivery on the deployed site before running ads.
+
+## Division launch visibility
+WisdaSchool and WisdaWorks are hidden from site navigation, homepage cards, detail sections, social cards, and general enquiry choices while they are being prepared. Their standalone pages remain in the repository for launch.
+
+To reveal either division across the site, add `launch-wisdaschool` or `launch-wisdaworks` to the `<body>` class list on each page that loads `styles.css`. Remove the class to hide it again. The general enquiry choices in `script.js` should also be updated when a division is launched.

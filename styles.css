@@ -58,3 +58,17 @@
 .check span{min-width:0}
 .check a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
 @media(max-width:760px){.web-head .web-wrap{min-height:68px;padding:8px 0}.web-head nav.web-nav{gap:0}.web-head nav.web-nav a:not(.web-btn){display:none}.web-head nav.web-nav .web-btn{display:inline-flex;align-self:auto;padding:10px 13px;font-size:.82rem}}
+
+body:not(.launch-wisdaschool) a[href*="wisdaschool.html"],
+body:not(.launch-wisdaschool) .school-card,
+body:not(.launch-wisdaschool) #school,
+body:not(.launch-wisdaschool) .social-school,
+body:not(.launch-wisdaschool) a[href*="profile.php?id=61595978941076"]{display:none!important}
+body:not(.launch-wisdaworks) a[href*="wisdaworks.html"],
+body:not(.launch-wisdaworks) .works-card,
+body:not(.launch-wisdaworks) #works,
+body:not(.launch-wisdaworks) .social-works{display:none!important}
+.explore .division-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),500px));justify-content:center}
+#social .social-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),400px));justify-content:center}
+#explore .section-top .kicker,
+.care-card .division-no{display:none}
