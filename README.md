@@ -31,6 +31,17 @@ Version 9: Corrected WisdaSchool language-pathway art. Internal illustration spa
 - For reliable Meta conversion optimization and tracking, add server-side registration storage and a confirmation page reached only after successful receipt. Clicking the WhatsApp button does not certify a registration.
 - Verify all URLs and WhatsApp message delivery on the deployed site before running ads.
 
+## WisdaSchool programme photography
+Programme photos in `images/WisdaSchool/` are reused under these licenses; matching credits are also shown beside each photo on the WisdaSchool page:
+- Bharatanatyam — WarmaFiesta, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://commons.wikimedia.org/wiki/File:Bharatanatyam_performer_at_Khajuraho_Dance_Festival_2026_017.jpg).
+- Carnatic singing — ImTHOP, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://commons.wikimedia.org/wiki/File:Carnatic_vocal_concert_by_sharana_sree.jpg).
+- Bollywood dance — Mainakchatterjee.tech, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://commons.wikimedia.org/wiki/File:Bollywood-Dance.jpg).
+- Japanese class — Rexdanato, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://commons.wikimedia.org/wiki/File:Japanese_course.jpg).
+- Science class — Siriyakorn poompradab, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [source](https://commons.wikimedia.org/wiki/File:Old_normal_-_SCIENCE_CLASS.jpg).
+
+## Division visibility
+WisdaSchool is visible on the site. WisdaWorks remains hidden from shared navigation, homepage cards, and social links unless `launch-wisdaworks` is added to the relevant page's `<body>` class list.
+
 ## Division launch visibility
 WisdaSchool and WisdaWorks are hidden from site navigation, homepage cards, detail sections, social cards, and general enquiry choices while they are being prepared. Their standalone pages remain in the repository for launch.
 

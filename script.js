@@ -1,7 +1,7 @@
 // Wisdatree v7 — no third-party form service required.
 // WhatsApp and email are composed in the VISITOR'S own app. The visitor must press Send.
 const BUSINESS_EMAIL = 'marketing@wisdatree.com';
-const WHATSAPP_NUMBERS = { default: '917010100644', care: '919344010644' };
+const WHATSAPP_NUMBERS = { default: '917010100644', school: '917010100644', care: '919344010644' };
 const dialog=document.querySelector('#enquiry-dialog');
 const form=document.querySelector('#enquiry-form');
 const divisionField=document.querySelector('#form-division');
@@ -10,10 +10,10 @@ const interestField=document.querySelector('#form-interest');
 const statusEl=document.querySelector('#form-status');
 const submitButton=document.querySelector('#submit-button');
 const options={
- school:['Tamil','Malayalam','Hindi','Other programmes','General school enquiry'],
+ school:['Tamil','Malayalam','Hindi','Japanese','Bharatanatyam','Carnatic singing','Bollywood dance','Mathematics','Science','Maths & Science','Other programmes','General school enquiry'],
  care:["Women's health",'Pregnancy & motherhood','Child health','Adolescent & teen health',"Men's health",'Mental wellbeing','Preventive health & nutrition','Webinars & events','Health partnership','Other'],
  works:['Workplace Tamil training','Workplace Kannada training','Other native-language training','Industry-specific training','Business partnership','Other'],
- general:['WisdaCare','Partnership','Other']
+ general:['WisdaSchool','WisdaCare','Partnership','Other']
 };
 const names={school:'WisdaSchool',care:'WisdaCare',works:'WisdaWorks',general:'Wisdatree'};
 let activeTrigger=null;
@@ -23,7 +23,7 @@ function openForm(type,course){
  form.reset();statusEl.textContent='';statusEl.className='form-status';
  divisionField.value=names[target];subjectField.value=`New ${names[target]} enquiry`;
  document.querySelector('#form-title').textContent=target==='general'?'Get in touch':`Enquire about ${names[target]}`;
- document.querySelector('#form-subtitle').textContent=target==='works'?'Tell us about your team and training requirements.':target==='care'?'Choose a health education topic or ask about an event.':'Tell us what you would like to learn about.';
+ document.querySelector('#form-subtitle').textContent=target==='works'?'Tell us about your team and training requirements.':target==='care'?'Choose a health education topic or ask about an event.':target==='school'?'Choose a programme. Your WhatsApp enquiry will open to +91 7010100644.':'Tell us what you would like to learn about.';
  interestField.innerHTML='<option value="">Select an option</option>'+options[target].map(x=>`<option value="${x}">${x}</option>`).join('');
  if(course&&options[target].includes(course))interestField.value=course;
  document.querySelector('#school-extra').classList.toggle('hidden',target!=='school');
@@ -49,12 +49,12 @@ form.querySelectorAll('[name="delivery_method"]').forEach(r=>r.addEventListener(
 function data(){const fd=new FormData(form);const g=k=>String(fd.get(k)||'').trim();return {
  division:g('division'),name:g('name'),email:g('email'),phone:g('phone'),country:g('country'),interest:g('interest'),learner_age:g('learner_age'),organization:g('organization'),message:g('message'),subject:g('_subject')
 };}
-function messageFor(d){const greeting=d.division==='WisdaCare'?'WisdaCare':'Wisdatree';return `Hello ${greeting}, I would like to enquire.\n\nDivision: ${d.division}\nInterest: ${d.interest}\nName: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone}\nCountry: ${d.country||'Not specified'}${d.learner_age?'\nLearner age/grade: '+d.learner_age:''}${d.organization?'\nOrganization: '+d.organization:''}${d.message?'\nMessage: '+d.message:''}`.replaceAll('\\n','\n');}
+function messageFor(d){const greeting=d.division==='WisdaCare'?'WisdaCare':d.division==='WisdaSchool'?'WisdaSchool':'Wisdatree';return `Hello ${greeting}, I would like to enquire.\n\nDivision: ${d.division}\nInterest: ${d.interest}\nName: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone}\nCountry: ${d.country||'Not specified'}${d.learner_age?'\nLearner age/grade: '+d.learner_age:''}${d.organization?'\nOrganization: '+d.organization:''}${d.message?'\nMessage: '+d.message:''}`.replaceAll('\\n','\n');}
 form.addEventListener('submit',async e=>{
  e.preventDefault();if(!form.reportValidity())return;
  const d=data();statusEl.textContent='';statusEl.className='form-status';
  if(chosenMethod()==='whatsapp'){
-    const whatsappNumber=d.division==='WisdaCare'?WHATSAPP_NUMBERS.care:WHATSAPP_NUMBERS.default;
+    const whatsappNumber=d.division==='WisdaCare'?WHATSAPP_NUMBERS.care:d.division==='WisdaSchool'?WHATSAPP_NUMBERS.school:WHATSAPP_NUMBERS.default;
     const url=`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageFor(d))}`;
   // A direct link may open the user's WhatsApp app or WhatsApp Web; the visitor must tap Send.
   const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.style.display='none';document.body.append(a);a.click();a.remove();

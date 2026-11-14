@@ -59,16 +59,44 @@
 .check a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
 @media(max-width:760px){.web-head .web-wrap{min-height:68px;padding:8px 0}.web-head nav.web-nav{gap:0}.web-head nav.web-nav a:not(.web-btn){display:none}.web-head nav.web-nav .web-btn{display:inline-flex;align-self:auto;padding:10px 13px;font-size:.82rem}}
 
-body:not(.launch-wisdaschool) a[href*="wisdaschool.html"],
-body:not(.launch-wisdaschool) .school-card,
-body:not(.launch-wisdaschool) #school,
-body:not(.launch-wisdaschool) .social-school,
-body:not(.launch-wisdaschool) a[href*="profile.php?id=61595978941076"]{display:none!important}
 body:not(.launch-wisdaworks) a[href*="wisdaworks.html"],
 body:not(.launch-wisdaworks) .works-card,
 body:not(.launch-wisdaworks) #works,
 body:not(.launch-wisdaworks) .social-works{display:none!important}
 .explore .division-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),500px));justify-content:center}
 #social .social-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),400px));justify-content:center}
-#explore .section-top .kicker,
-.care-card .division-no{display:none}
+.school-program-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px}
+.school-program-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #e1e9e7;border-radius:18px;background:#fff;box-shadow:0 12px 32px #123b5710}
+.school-program-photo{height:210px;overflow:hidden;background:#eaf1f2}
+.school-program-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.school-program-card:hover .school-program-photo img{transform:scale(1.035)}
+.school-program-content{display:flex;flex:1;flex-direction:column;padding:23px}
+.school-program-content .kicker{font-size:10px;color:#287647}
+.school-program-content h3{margin:10px 0;font-size:22px;color:var(--navy)}
+.school-program-content p{margin:0 0 18px;font-size:13px;line-height:1.75;color:#596b7c}
+.school-program-content button{align-self:flex-start;margin-top:auto;border:0;background:none;padding:0;color:var(--navy);font-size:12px;font-weight:800;text-align:left}
+.school-program-content button:hover{text-decoration:underline;text-underline-offset:3px}
+.school-image-credit{margin-top:16px;color:#6b7986;font-size:10px;line-height:1.6}
+.school-image-credit a{color:#355978;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:620px){.school-program-photo{height:190px}.school-program-content{padding:20px}}
+
+body:not(.launch-wisdaworks) a[href*="wisdaworks.html"],
+body:not(.launch-wisdaworks) .works-card,
+body:not(.launch-wisdaworks) #works,
+body:not(.launch-wisdaworks) .social-works{display:none!important}
+.explore .division-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),500px));justify-content:center}
+#social .social-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),400px));justify-content:center}
+.school-program-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px}
+.school-program-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #e1e9e7;border-radius:18px;background:#fff;box-shadow:0 12px 32px #123b5710}
+.school-program-photo{height:210px;overflow:hidden;background:#eaf1f2}
+.school-program-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.school-program-card:hover .school-program-photo img{transform:scale(1.035)}
+.school-program-content{display:flex;flex:1;flex-direction:column;padding:23px}
+.school-program-content .kicker{font-size:10px;color:#287647}
+.school-program-content h3{margin:10px 0;font-size:22px;color:var(--navy)}
+.school-program-content p{margin:0 0 18px;font-size:13px;line-height:1.75;color:#596b7c}
+.school-program-content button{align-self:flex-start;margin-top:auto;border:0;background:none;padding:0;color:var(--navy);font-size:12px;font-weight:800;text-align:left}
+.school-program-content button:hover{text-decoration:underline;text-underline-offset:3px}
+.school-image-credit{margin-top:16px;color:#6b7986;font-size:10px;line-height:1.6}
+.school-image-credit a{color:#355978;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:620px){.school-program-photo{height:190px}.school-program-content{padding:20px}}
