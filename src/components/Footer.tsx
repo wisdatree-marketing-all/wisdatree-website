@@ -213,14 +213,6 @@ export const Footer: React.FC<FooterProps> = ({
             <button onClick={() => onOpenPolicy('rescheduling')} className="hover:text-slate-300">
               Rescheduling Terms
             </button>
-            <span>·</span>
-            <a
-              href="/wisdatree-website.zip"
-              download="wisdatree-website.zip"
-              className="text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1"
-            >
-              <span>Download Code (.zip)</span>
-            </a>
           </div>
         </div>
       </div>

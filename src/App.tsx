@@ -82,23 +82,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fcfdfc] text-slate-800 selection:bg-[#168038] selection:text-white">
-      {/* Top Banner Notice */}
-      <div className="bg-[#0a2558] text-white text-[11px] sm:text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-3 flex-wrap">
-        <span>✨ Welcome to the new Wisdatree ecosystem portal!</span>
-        <span className="hidden sm:inline text-emerald-300">·</span>
-        <span className="hidden sm:inline text-slate-200">
-          WisdaSchool: {SCHOOL_PHONE_DISPLAY} · WisdaCare: {CARE_PHONE_DISPLAY}
-        </span>
-        <span className="hidden md:inline text-emerald-300">·</span>
-        <a
-          href="/wisdatree-website.zip"
-          download="wisdatree-website.zip"
-          className="text-emerald-300 hover:text-white underline font-semibold transition-colors"
-        >
-          Download Code (.zip) 📥
-        </a>
-      </div>
-
       {/* Navigation */}
       <Navbar
         activeView={activeView}
