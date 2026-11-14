@@ -17,6 +17,7 @@ import {
 import { COURSES_DATA } from '../data/coursesData';
 import { Course, CourseCategory, Division } from '../types';
 import { SCHOOL_PHONE_DISPLAY } from './EnquiryModal';
+import wisdaschoolLearningBanner from '../assets/images/wisdaschool_learning_banner.jpg';
 
 interface WisdaSchoolHubProps {
   onOpenEnquiry: (division?: Division, interest?: string) => void;
@@ -37,18 +38,63 @@ export const WisdaSchoolHub: React.FC<WisdaSchoolHubProps> = ({ onOpenEnquiry })
   return (
     <section id="wisdaschool" className="py-12 sm:py-16 lg:py-20 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#168038] mb-2">
-            <GraduationCap className="w-4 h-4" />
-            <span>WisdaSchool Hub · Comprehensive Curriculum</span>
+        {/* Section Header with Featured Learning Banner */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#168038]">
+              <GraduationCap className="w-4 h-4" />
+              <span>WisdaSchool Hub · Comprehensive Curriculum</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a2558] tracking-tight">
+              Language pathways, classical arts &amp; conceptual STEM.
+            </h2>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Live online instruction with structured learning stages, cultural depth, and experienced mentors. We currently offer <strong className="text-slate-900 font-semibold">Tamil, Hindi, Malayalam, Bharatanatyam, Carnatic Music, Mathematics, and Science</strong>.
+            </p>
+
+            <div className="flex flex-wrap gap-2 pt-1 text-xs text-slate-700 font-medium">
+              <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#168038] font-semibold">
+                ✓ 7 Graded Syllabi
+              </span>
+              <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
+                1-on-1 &amp; Small Cohorts
+              </span>
+              <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
+                Native Language Mentors
+              </span>
+              <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
+                Flexible Global Timezones
+              </span>
+            </div>
+
+            <div className="pt-2 flex items-center gap-3">
+              <button
+                onClick={() => onOpenEnquiry('WisdaSchool')}
+                className="px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-white bg-[#168038] hover:bg-[#136e2f] shadow-xs transition-all flex items-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Enquire for Classes ({SCHOOL_PHONE_DISPLAY})</span>
+              </button>
+            </div>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a2558] tracking-tight">
-            Language pathways, classical arts &amp; conceptual STEM.
-          </h2>
-          <p className="text-slate-600 mt-3 text-base sm:text-lg leading-relaxed">
-            Live online instruction with structured learning stages, cultural depth, and experienced mentors. We currently offer <strong className="text-slate-900 font-semibold">Tamil, Hindi, Malayalam, Bharatanatyam, Carnatic Music, Mathematics, and Science</strong>.
-          </p>
+
+          <div className="lg:col-span-5">
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200/90 bg-white group">
+              <img
+                src={wisdaschoolLearningBanner}
+                alt="WisdaSchool interactive online learning with children, teacher, books, and heritage"
+                className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                loading="eager"
+              />
+              <div className="p-3 bg-white/95 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span className="font-bold text-[#168038] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  WisdaSchool Live Classrooms
+                </span>
+                <span className="text-[11px] text-slate-500 font-medium">Interactive Online</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Category Filter Tabs (Segmented Button Control) */}

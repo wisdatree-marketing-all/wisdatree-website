@@ -1,6 +1,7 @@
 import React from 'react';
 import { GraduationCap, HeartPulse, ArrowRight, MessageCircle, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Division } from '../types';
+import wisdatreeEcosystemBanner from '../assets/images/wisdatree_ecosystem_banner.jpg';
 
 interface HeroSectionProps {
   onNavigate: (view: 'home' | 'school' | 'care' | 'about' | 'careers') => void;
@@ -110,11 +111,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           {/* Right Column: Hero Visual Showcase */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200/90 aspect-4/3 sm:aspect-16/10 lg:aspect-4/3">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200/90 aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 bg-slate-100 group">
               <img
-                src="/src/assets/images/hero_wisdatree_learning_1793991991489.jpg"
-                alt="Inspiring live interactive online class with child and parent"
-                className="w-full h-full object-cover"
+                src={wisdatreeEcosystemBanner}
+                alt="Wisdatree overarching ecosystem bringing together education, wellness, and careers"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
@@ -124,24 +125,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#168038]">
-                      Global Classroom
+                      Global Ecosystem
                     </span>
                     <h4 className="text-sm font-bold text-[#0a2558]">
-                      Structured Pathways with Heart
+                      Wisdatree · Nurture Your Future
                     </h4>
                   </div>
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-[#168038]">
-                      Live Online
+                      Education &amp; Care
                     </span>
                   </div>
                 </div>
                 <div className="mt-2 text-xs text-slate-600 flex items-center gap-2 flex-wrap">
-                  <span>Tamil · Hindi · Malayalam</span>
+                  <span className="font-medium text-slate-800">WisdaSchool (7 Subjects)</span>
                   <span>·</span>
-                  <span>Classical Arts</span>
+                  <span className="font-medium text-slate-800">WisdaCare (Health &amp; Wellness)</span>
                   <span>·</span>
-                  <span>STEM</span>
+                  <span className="font-medium text-slate-800">Careers</span>
                 </div>
               </div>
             </div>
