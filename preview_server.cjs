@@ -4,13 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
-const PORT = 3000;
+let currentPort = 3000;
 const DIST_DIR = path.join(__dirname, 'dist');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
+  '.mjs': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
@@ -29,7 +30,7 @@ const server = http.createServer((req, res) => {
 
   let filePath = path.join(DIST_DIR, safePath);
 
-  // Fallback to index.html for SPA client-side routing
+  // If file doesn't exist directly, check without leading slash
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     filePath = path.join(DIST_DIR, 'index.html');
   }
@@ -43,13 +44,29 @@ const server = http.createServer((req, res) => {
       res.end('500 - Internal Server Error');
       return;
     }
+    // Allow CORS and set caching
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200, { 'Content-Type': contentType });
     res.end(content);
   });
 });
 
-server.listen(PORT, () => {
-  const url = `http://localhost:${PORT}`;
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    currentPort++;
+    if (currentPort < 3010) {
+      console.log(`Port ${currentPort - 1} is in use, trying port ${currentPort}...`);
+      server.listen(currentPort, '0.0.0.0');
+    } else {
+      console.error('All ports between 3000-3010 are in use.');
+    }
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
+server.listen(currentPort, '0.0.0.0', () => {
+  const url = `http://localhost:${currentPort}`;
   console.log(`\n======================================================`);
   console.log(`  Wisdatree Website Preview is running!`);
   console.log(`  Local URL: ${url}`);
