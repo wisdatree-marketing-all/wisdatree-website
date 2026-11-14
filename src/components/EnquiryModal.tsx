@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, MessageCircle, Mail, CheckCircle2, Copy, AlertCircle, ShieldCheck } from 'lucide-react';
+import { X, MessageCircle, Mail, CheckCircle2, Copy, AlertCircle, ShieldCheck, HeartPulse, GraduationCap } from 'lucide-react';
 import { Division, EnquiryData } from '../types';
 import { CARE_PHONE, CARE_PHONE_DISPLAY } from '../data/careData';
 
@@ -14,7 +14,7 @@ export const SCHOOL_PHONE = '917010100644';
 export const SCHOOL_PHONE_DISPLAY = '+91 70101 00644';
 export const BUSINESS_EMAIL = 'marketing@wisdatree.com';
 
-const DIVISION_INTERESTS: Record<Division, string[]> = {
+const DIVISION_INTERESTS: Record<'WisdaSchool' | 'WisdaCare', string[]> = {
   WisdaSchool: [
     'Tamil Language Course',
     'Hindi Language Course',
@@ -23,46 +23,32 @@ const DIVISION_INTERESTS: Record<Division, string[]> = {
     'Carnatic Music (Vocal)',
     'Mathematics Foundations & Olympiad',
     'Experiential Science Discovery',
-    'General School Enquiry'
+    'General WisdaSchool Admissions Enquiry'
   ],
   WisdaCare: [
-    'Pregnancy & Motherhood (Motherhood Diaries)',
-    "Women's Health & Hormonal Balance",
+    'Motherhood Diaries (Signature Webseries & Webinars)',
+    'Pregnancy & Maternal Trimester Wellness',
+    "Women's Health & Hormonal Balance (PCOS/Thyroid)",
     'Child Health & Developmental Milestones',
     'Adolescent & Teen Wellbeing',
     "Men's Health & Preventive Fitness",
     'Mental Wellbeing & Emotional Resilience',
-    'Preventive Nutrition & Lifestyle',
-    'Hospital & Expert Partnerships',
-    'General Health Education Enquiry'
-  ],
-  WisdaWorks: [
-    'Workplace Native Language Training',
-    'Corporate Communication Workshops',
-    'Industry-Specific Language Module',
-    'Enterprise Partnership'
-  ],
-  Careers: [
-    'Teaching / Faculty Role',
-    'Health Education Specialist',
-    'Academic Coordinator',
-    'Curriculum & Content Writer'
-  ],
-  General: [
-    'General Wisdatree Enquiry',
-    'WisdaSchool Information',
-    'WisdaCare Information',
-    'Partnership Opportunities'
+    'Preventive Nutrition & Lifestyle Medicine',
+    'General WisdaCare Health Enquiry'
   ]
 };
 
 export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   isOpen,
   onClose,
-  defaultDivision = 'WisdaSchool',
+  defaultDivision = 'General',
   defaultInterest = ''
 }) => {
-  const [division, setDivision] = useState<Division>(defaultDivision);
+  // Normalize division to either WisdaSchool or WisdaCare for the form
+  const initialDivision: 'WisdaSchool' | 'WisdaCare' =
+    defaultDivision === 'WisdaCare' ? 'WisdaCare' : 'WisdaSchool';
+
+  const [division, setDivision] = useState<'WisdaSchool' | 'WisdaCare'>(initialDivision);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -79,8 +65,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      setDivision(defaultDivision);
-      const availableInterests = DIVISION_INTERESTS[defaultDivision] || [];
+      const activeDiv: 'WisdaSchool' | 'WisdaCare' =
+        defaultDivision === 'WisdaCare' ? 'WisdaCare' : 'WisdaSchool';
+      setDivision(activeDiv);
+
+      const availableInterests = DIVISION_INTERESTS[activeDiv] || [];
       if (defaultInterest && availableInterests.includes(defaultInterest)) {
         setInterest(defaultInterest);
       } else if (availableInterests.length > 0) {
@@ -94,7 +83,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   }, [isOpen, defaultDivision, defaultInterest]);
 
   // Handle division switch inside modal
-  const handleDivisionChange = (newDiv: Division) => {
+  const handleDivisionChange = (newDiv: 'WisdaSchool' | 'WisdaCare') => {
     setDivision(newDiv);
     const interests = DIVISION_INTERESTS[newDiv] || [];
     setInterest(interests[0] || '');
@@ -105,12 +94,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   const targetPhoneNumber = division === 'WisdaCare' ? CARE_PHONE : SCHOOL_PHONE;
   const targetPhoneDisplay = division === 'WisdaCare' ? CARE_PHONE_DISPLAY : SCHOOL_PHONE_DISPLAY;
 
+  const isGeneralModal = defaultDivision === 'General' || !defaultDivision;
+
   const constructFormattedMessage = (): string => {
     const greeting = division === 'WisdaCare' ? 'WisdaCare Team' : 'WisdaSchool Team';
     return `Hello ${greeting}, I would like to make an enquiry with Wisdatree.
 
 • Division: ${division}
-• Programme / Interest: ${interest || 'General'}
+• Programme / Topic: ${interest || 'General'}
 • Full Name: ${name}
 • WhatsApp / Phone: ${phone}
 • Email: ${email}
@@ -141,7 +132,7 @@ Looking forward to hearing from your team. Thank you!`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
       setStatusMessage({
         type: 'success',
-        text: `Your enquiry has been prepared for WhatsApp (${targetPhoneDisplay}). Please tap "Send" in your WhatsApp chat window to complete delivery.`
+        text: `Your enquiry has been prepared for ${division} WhatsApp (${targetPhoneDisplay}). Please tap "Send" in your WhatsApp chat window to complete delivery.`
       });
     } else {
       const subject = `[Wisdatree Enquiry] ${division} - ${interest || 'General'}`;
@@ -180,7 +171,11 @@ Looking forward to hearing from your team. Thank you!`;
                 Wisdatree Direct Connect
               </span>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mt-0.5">
-                {division === 'WisdaSchool' ? 'Enquire with WisdaSchool' : division === 'WisdaCare' ? 'Connect with WisdaCare' : 'Get in Touch with Wisdatree'}
+                {isGeneralModal
+                  ? 'Enquire with Wisdatree'
+                  : division === 'WisdaCare'
+                  ? 'Connect with WisdaCare'
+                  : 'Enquire with WisdaSchool'}
               </h2>
             </div>
             <button
@@ -192,44 +187,54 @@ Looking forward to hearing from your team. Thank you!`;
             </button>
           </div>
           <p className="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">
-            {division === 'WisdaCare'
-              ? 'Health awareness webinars, motherhood guidance & community sessions.'
+            {isGeneralModal
+              ? 'Select WisdaSchool or WisdaCare below to submit your enquiry directly to the dedicated department.'
+              : division === 'WisdaCare'
+              ? 'Health awareness webinars, motherhood guidance & clinical literacy.'
               : 'Interactive spoken languages, Bharatanatyam, Carnatic vocal & STEM.'}
           </p>
-
-          {/* Division switcher inside modal */}
-          <div className="flex gap-2 mt-3">
-            <button
-              type="button"
-              onClick={() => handleDivisionChange('WisdaSchool')}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                division === 'WisdaSchool'
-                  ? 'bg-white text-[#0a2558] shadow-xs'
-                  : 'bg-white/15 text-white hover:bg-white/25'
-              }`}
-            >
-              WisdaSchool
-            </button>
-            <button
-              type="button"
-              onClick={() => handleDivisionChange('WisdaCare')}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                division === 'WisdaCare'
-                  ? 'bg-emerald-400 text-slate-900 shadow-xs'
-                  : 'bg-white/15 text-white hover:bg-white/25'
-              }`}
-            >
-              WisdaCare
-            </button>
-          </div>
         </div>
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
-          {/* Interest Selection */}
+          {/* Step 1: Simple Dropdown to Choose WisdaSchool / WisdaCare */}
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Select Programme / Department <span className="text-red-500">*</span>
+              </label>
+              <span className="text-[11px] font-semibold text-emerald-800">
+                Direct WhatsApp Route
+              </span>
+            </div>
+
+            <select
+              value={division}
+              onChange={(e) => handleDivisionChange(e.target.value as 'WisdaSchool' | 'WisdaCare')}
+              className="w-full px-3.5 py-2.5 rounded-xl border-2 border-emerald-600 bg-white text-slate-900 font-bold text-sm focus:ring-2 focus:ring-[#168038]/20 focus:outline-hidden transition-all shadow-xs cursor-pointer"
+            >
+              <option value="WisdaSchool">🎓 WisdaSchool — Online Languages, Classical Arts &amp; STEM</option>
+              <option value="WisdaCare">🩺 WisdaCare — Doctor-Guided Family &amp; Maternal Health</option>
+            </select>
+
+            {/* Dynamic Routing Info Banner */}
+            <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-white border border-emerald-200 text-xs">
+              <div className="flex items-center gap-2">
+                <MessageCircle className="w-4 h-4 text-[#168038]" />
+                <span className="text-slate-600">Routes to WhatsApp:</span>
+                <strong className="text-[#0a2558] font-bold text-xs sm:text-sm">{targetPhoneDisplay}</strong>
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-[#168038]">
+                {division === 'WisdaCare' ? 'WisdaCare Healthcare' : 'WisdaSchool Admissions'}
+              </span>
+            </div>
+          </div>
+
+          {/* Respective Course / Topic Selection */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-              I am interested in <span className="text-red-500">*</span>
+              {division === 'WisdaCare' ? 'Choose Health Topic / Webseries' : 'Choose Subject / Course'}{' '}
+              <span className="text-red-500">*</span>
             </label>
             <select
               value={interest}
@@ -244,6 +249,16 @@ Looking forward to hearing from your team. Thank you!`;
               ))}
             </select>
           </div>
+
+          {/* WisdaCare Doctor Assurance Notice */}
+          {division === 'WisdaCare' && (
+            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 flex items-center gap-2">
+              <HeartPulse className="w-4 h-4 text-emerald-700 shrink-0" />
+              <span>
+                <strong>Doctor Guarantee:</strong> Sessions handled and designed exclusively by certified doctors and medical practitioners with scientific proofs.
+              </span>
+            </div>
+          )}
 
           {/* Name & Phone */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -340,7 +355,11 @@ Looking forward to hearing from your team. Thank you!`;
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Tell us what you hope to achieve, preferred weekday/weekend times, or specific questions..."
+              placeholder={
+                division === 'WisdaCare'
+                  ? 'Tell us your questions for our doctors, preferred webinar topics, or health education queries...'
+                  : 'Tell us what you hope to achieve, preferred weekday/weekend times, or specific questions...'
+              }
               rows={2}
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-slate-800 text-sm focus:border-[#168038] focus:ring-2 focus:ring-[#168038]/20 focus:outline-hidden transition-all"
             />
@@ -380,7 +399,7 @@ Looking forward to hearing from your team. Thank you!`;
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 mt-1">
-                    Pre-fills your message directly to {targetPhoneDisplay}. Instant confirmation.
+                    Pre-fills your message directly to {division} ({targetPhoneDisplay}). Instant confirmation.
                   </p>
                 </div>
               </label>
@@ -521,7 +540,7 @@ Looking forward to hearing from your team. Thank you!`;
               {deliveryMethod === 'whatsapp' ? (
                 <>
                   <MessageCircle className="w-4 h-4" />
-                  <span>Send via WhatsApp ↗ ({targetPhoneDisplay})</span>
+                  <span>Send to {division} WhatsApp ({targetPhoneDisplay}) ↗</span>
                 </>
               ) : (
                 <>

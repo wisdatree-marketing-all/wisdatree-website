@@ -61,7 +61,7 @@ export default function App() {
     else window.location.hash = `#${view}`;
   };
 
-  const handleOpenEnquiry = (division: Division = 'WisdaSchool', interest: string = '') => {
+  const handleOpenEnquiry = (division: Division = 'General', interest: string = '') => {
     setEnquiryDivision(division);
     setEnquiryInterest(interest);
     setEnquiryOpen(true);

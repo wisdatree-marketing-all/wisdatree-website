@@ -93,11 +93,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Primary Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-3">
               <button
-                onClick={() => onOpenEnquiry('WisdaSchool')}
+                onClick={() => onOpenEnquiry('General')}
                 className="px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-[#168038] hover:bg-[#136e2f] shadow-md shadow-emerald-700/20 active:scale-[0.99] transition-all flex items-center gap-2"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Enquire via WhatsApp ↗</span>
+                <span>Enquire with Wisdatree ↗</span>
               </button>
 
               <button

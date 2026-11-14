@@ -103,18 +103,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Zone 3: Primary Action CTA */}
           <div className="hidden sm:flex items-center gap-3 shrink-0">
             <button
-              onClick={() => onOpenEnquiry('WisdaSchool')}
+              onClick={() => onOpenEnquiry('General')}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#168038] hover:bg-[#136e2f] transition-all shadow-xs shadow-emerald-700/20 active:scale-[0.98] whitespace-nowrap"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Enquire on WhatsApp ↗</span>
+              <span>Enquire with Wisdatree ↗</span>
             </button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <div className="flex sm:hidden items-center gap-2">
             <button
-              onClick={() => onOpenEnquiry('WisdaSchool')}
+              onClick={() => onOpenEnquiry('General')}
               className="p-2 rounded-xl text-white bg-[#168038] hover:bg-[#136e2f] transition-colors"
               aria-label="Quick WhatsApp Enquiry"
             >
@@ -199,12 +199,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenEnquiry('WisdaSchool');
+                onOpenEnquiry('General');
               }}
               className="w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-[#168038] hover:bg-[#136e2f] shadow-sm flex items-center justify-center gap-2"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Enquire via WhatsApp ↗</span>
+              <span>Enquire with Wisdatree ↗</span>
             </button>
           </div>
         </div>
